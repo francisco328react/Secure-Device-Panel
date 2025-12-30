@@ -1,7 +1,10 @@
+import { Layout } from "./components/Layout/Layout";
+import { Dashboard } from "./pages/Dashboard/Dashboard";
+
 export function App() {
   return (
-    <div>
-      <h1 className="text-2xl font-bold underline ">Hello World</h1>
-    </div>
+    <Layout>
+      <Dashboard />
+    </Layout>
   )
 }
