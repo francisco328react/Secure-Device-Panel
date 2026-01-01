@@ -7,6 +7,7 @@ import { Login } from "../pages/Login/Login"
 import { PrivateRoute } from "./PrivateRoute"
 import { AuthProvider } from "../contexts/AuthContext"
 import { LogProvider } from "../contexts/LogContext"
+import { RoleRoute } from "./RoleRoute"
 
 export function AppRoutes() {
     return (
@@ -42,9 +43,11 @@ export function AppRoutes() {
                             path="/logs"
                             element={
                                 <PrivateRoute>
-                                    <Layout>
-                                        <Logs />
-                                    </Layout>
+                                    <RoleRoute role="admin">
+                                        <Layout>
+                                            <Logs />
+                                        </Layout>
+                                    </RoleRoute>
                                 </PrivateRoute>
                             }
                         />

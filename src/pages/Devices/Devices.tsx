@@ -1,8 +1,11 @@
 import { useDevices } from "../../hooks/useDevices"
 import { DeviceForm } from "../../components/DeviceForm/DeviceForm"
+import { canAccess } from "../../utils/permissions/permissions"
+import { useAuth } from "../../contexts/AuthContext"
 
 export function Devices() {
     const { devices, performAction } = useDevices()
+    const { user } = useAuth()
 
     return (
         <div>
@@ -26,24 +29,32 @@ export function Devices() {
                                 {d.completed ? 'Ativo' : 'Inativo'}
                             </td>
                             <td className="p-2 text-center space-x-2">
-                                <button
-                                    onClick={() => performAction(d.id, 'block')}
-                                    className="px-2 py-1 bg-red-500 text-white rounded cursor-pointer"
-                                >
-                                Bloquear
-                                </button>
-                                <button
-                                    onClick={() => performAction(d.id, 'unblock')}
-                                    className="px-2 py-1 bg-green-500 text-white rounded cursor-pointer"
-                                >
-                                Desbloquear
-                                </button>
-                                <button
-                                    onClick={() => performAction(d.id, 'reset')}
-                                    className="px-2 py-1 bg-yellow-500 text-white rounded cursor-pointer"
-                                >
-                                Reset
-                                </button>
+                                {user && canAccess(user.role, 'manage_devices') && (
+                                    <button
+                                        onClick={() => performAction(d.id, 'block')}
+                                        className="px-2 py-1 bg-red-500 text-white rounded cursor-pointer"
+                                    >
+                                        Bloquear
+                                    </button>
+                                )}
+
+                                {user && canAccess(user.role, 'manage_devices') && (
+                                    <button
+                                        onClick={() => performAction(d.id, 'unblock')}
+                                        className="px-2 py-1 bg-green-500 text-white rounded cursor-pointer"
+                                    >
+                                        Desbloquear
+                                    </button>
+                                )}
+
+                                {user && canAccess(user.role, 'manage_devices') && (
+                                    <button
+                                        onClick={() => performAction(d.id, 'reset')}
+                                        className="px-2 py-1 bg-yellow-500 text-white rounded cursor-pointer"
+                                    >
+                                        Reset
+                                    </button>
+                                )}
                             </td>
                         </tr>
                     ))}
