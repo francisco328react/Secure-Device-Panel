@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { api } from "../services/api";
 import type { Device } from "../types/Devices/Devices";
 import type { DeviceAction } from "../types/DeviceAction/DeviceAction";
+import { useLogs } from "../contexts/LogContext";
 
 export function useDevices() {
     const [devices, setDevices] = useState<Device[]>([])
+    const { addLog } = useLogs()
 
     useEffect(() => {
         api.get<Device[]>('/todos?_limit=10').then((response) => {
@@ -23,6 +25,13 @@ export function useDevices() {
                 : d,
             ),
         );
+
+        addLog({
+            id: Date.now(),
+            deviceId: id,
+            action,
+            date: new Date().toLocaleString(),
+        });
     }
 
     return { devices, performAction }

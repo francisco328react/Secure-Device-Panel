@@ -6,47 +6,50 @@ import { Logs } from "../pages/Logs/Logs"
 import { Login } from "../pages/Login/Login"
 import { PrivateRoute } from "./PrivateRoute"
 import { AuthProvider } from "../contexts/AuthContext"
+import { LogProvider } from "../contexts/LogContext"
 
 export function AppRoutes() {
     return (
         <BrowserRouter>
             <AuthProvider>
-                <Routes>
-                    <Route path="/login" element={<Login />} />
+                <LogProvider>
+                    <Routes>
+                        <Route path="/login" element={<Login />} />
 
-                    <Route
-                        path="/"
-                        element={
-                            <PrivateRoute>
-                                <Layout>
-                                    <Dashboard />
-                                </Layout>
-                            </PrivateRoute>
-                        }
-                    />
+                        <Route
+                            path="/"
+                            element={
+                                <PrivateRoute>
+                                    <Layout>
+                                        <Dashboard />
+                                    </Layout>
+                                </PrivateRoute>
+                            }
+                        />
 
-                    <Route
-                        path="/devices"
-                        element={
-                            <PrivateRoute>
-                                <Layout>
-                                    <Devices />
-                                </Layout>
-                            </PrivateRoute>
-                        }
-                    />
+                        <Route
+                            path="/devices"
+                            element={
+                                <PrivateRoute>
+                                    <Layout>
+                                        <Devices />
+                                    </Layout>
+                                </PrivateRoute>
+                            }
+                        />
 
-                    <Route
-                        path="/logs"
-                        element={
-                            <PrivateRoute>
-                                <Layout>
-                                    <Logs />
-                                </Layout>
-                            </PrivateRoute>
-                        }
-                    />
+                        <Route
+                            path="/logs"
+                            element={
+                                <PrivateRoute>
+                                    <Layout>
+                                        <Logs />
+                                    </Layout>
+                                </PrivateRoute>
+                            }
+                        />
                     </Routes>
+                </LogProvider>
             </AuthProvider>
         </BrowserRouter>
     )
