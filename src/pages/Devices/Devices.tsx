@@ -1,4 +1,5 @@
 import { useDevices } from "../../hooks/useDevices"
+import { DeviceForm } from "../../components/DeviceForm/DeviceForm"
 
 export function Devices() {
     const { devices, performAction } = useDevices()
@@ -6,6 +7,7 @@ export function Devices() {
     return (
         <div>
             <h2 className="text-2xl font-bold mb-4">Dispositivos</h2>
+            <DeviceForm />
             <table className="w-full bg-white rounded shadow">
                 <thead>
                     <tr className="border-b">
