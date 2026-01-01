@@ -1,0 +1,1 @@
+export type DeviceAction = 'block' | 'unblock' | 'reset'

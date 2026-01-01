@@ -1,7 +1,7 @@
 import { useDevices } from "../../hooks/useDevices"
 
 export function Devices() {
-    const { devices } = useDevices()
+    const { devices, performAction } = useDevices()
 
     return (
         <div>
@@ -12,6 +12,7 @@ export function Devices() {
                         <th className="p-2 text-left">ID</th>
                         <th className="p-2 text-left">Nome</th>
                         <th className="p-2">Status</th>
+                        <th className="p-2">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -21,6 +22,26 @@ export function Devices() {
                             <td className="p-2">{d.title}</td>
                             <td className="p-2 text-center">
                                 {d.completed ? 'Ativo' : 'Inativo'}
+                            </td>
+                            <td className="p-2 text-center space-x-2">
+                                <button
+                                    onClick={() => performAction(d.id, 'block')}
+                                    className="px-2 py-1 bg-red-500 text-white rounded cursor-pointer"
+                                >
+                                Bloquear
+                                </button>
+                                <button
+                                    onClick={() => performAction(d.id, 'unblock')}
+                                    className="px-2 py-1 bg-green-500 text-white rounded cursor-pointer"
+                                >
+                                Desbloquear
+                                </button>
+                                <button
+                                    onClick={() => performAction(d.id, 'reset')}
+                                    className="px-2 py-1 bg-yellow-500 text-white rounded cursor-pointer"
+                                >
+                                Reset
+                                </button>
                             </td>
                         </tr>
                     ))}
